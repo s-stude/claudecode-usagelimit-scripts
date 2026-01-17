@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Get extra usage data from JSON
-used_credits=$(jq -r '.extra_usage.used_credits' claude-usage.json)
-utilization=$(jq -r '.extra_usage.utilization' claude-usage.json)
+used_credits=$(jq -r '.extra_usage.used_credits' "$SCRIPT_DIR/claude-usage.json")
+utilization=$(jq -r '.extra_usage.utilization' "$SCRIPT_DIR/claude-usage.json")
 
 # Check if values are null
 if [ "$used_credits" = "null" ] || [ "$utilization" = "null" ]; then

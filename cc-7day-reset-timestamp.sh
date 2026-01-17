@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Get the reset timestamp from JSON
-reset_time=$(jq -r '.seven_day.resets_at' claude-usage.json)
+reset_time=$(jq -r '.seven_day.resets_at' "$SCRIPT_DIR/claude-usage.json")
 
 if [ "$reset_time" = "null" ]; then
     echo "Week limit reset unknown"
