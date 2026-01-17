@@ -137,10 +137,33 @@ Shows the time remaining until the 7-day (weekly) limit resets, or when it was r
 
 ---
 
+### 5. `cc-extra-spend.sh`
+
+Shows the monthly extra usage spend in dollars and percentage.
+
+**Usage:**
+```bash
+./cc-extra-spend.sh
+```
+
+**Possible Outputs:**
+- `Monthly extra spend: N/A` - When extra_usage data is null
+- `Monthly extra spend: $9.63 (48.2%)` - Current spend and utilization percentage
+
+**Description:**
+- Reads `claude-usage.json`
+- Extracts `extra_usage.used_credits` and converts to dollars (divides by 100)
+- Extracts `extra_usage.utilization` percentage
+- Formats as currency with 2 decimal places
+- Displays both dollar amount and percentage of monthly limit used
+
+---
+
 ## Requirements
 
 All scripts require:
 - **jq** - Command-line JSON processor
+- **bc** - Basic calculator (for `cc-extra-spend.sh`)
 
 ### Installing jq
 
@@ -159,6 +182,25 @@ sudo apt-get install jq
 sudo dnf install jq
 ```
 
+### Installing bc
+
+**macOS:**
+```bash
+brew install bc
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get install bc
+```
+
+**Linux (Fedora):**
+```bash
+sudo dnf install bc
+```
+
+Note: `bc` is usually pre-installed on most Linux distributions and macOS.
+
 ## Cross-Platform Compatibility
 
 The timestamp scripts (`cc-5hr-reset-timestamp.sh` and `cc-7day-reset-timestamp.sh`) are designed to work on both:
@@ -171,7 +213,7 @@ They automatically detect the platform and use the appropriate date command synt
 
 1. Ensure all scripts have execute permissions:
 ```bash
-chmod +x cc-5hr-usage.sh cc-7day-usage.sh cc-5hr-reset-timestamp.sh cc-7day-reset-timestamp.sh
+chmod +x cc-5hr-usage.sh cc-7day-usage.sh cc-5hr-reset-timestamp.sh cc-7day-reset-timestamp.sh cc-extra-spend.sh
 ```
 
 2. Make sure `claude-usage.json` exists in the same directory as the scripts
@@ -194,6 +236,12 @@ Day limit reset unknown
 
 $ ./cc-7day-reset-timestamp.sh
 Week limit reset 4h 21m ago
+```
+
+Check monthly extra spend:
+```bash
+$ ./cc-extra-spend.sh
+Monthly extra spend: $9.63 (48.2%)
 ```
 
 ## Use Cases
