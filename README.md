@@ -1,8 +1,16 @@
-# Claude Code Usage Limits UI
+# Claude Code Usage and Limits UI
+
+I use `ccstatusline` to show my Claude Code usage in my terminal.
+
+![/demo.png](/demo.png "CC Demo")
 
 A collection of shell scripts to parse and display Claude Code usage limits and reset timers from the `claude-usage.json` file.
 
 ## Source File: `claude-usage.json`
+
+You must have this file up to date. 
+
+Download it from `https://api.anthropic.com/api/oauth/usage`. Ask Claude how.
 
 This JSON file contains usage limit information for Claude Code, tracking your utilization across different time windows:
 
@@ -243,6 +251,12 @@ Check monthly extra spend:
 $ ./cc-extra-spend.sh
 Monthly extra spend: $9.63 (48.2%)
 ```
+
+## Claude Code Integration
+
+I use `ccstatusline` by running `npx ccstatusline@latest` and update my CC status line in it. These scripts come in handy for displaying real-time usage information directly in the Claude Code status line.
+
+---
 
 ## Use Cases
 
